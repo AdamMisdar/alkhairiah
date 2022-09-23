@@ -1,0 +1,2 @@
+# alkhairiah
+Qurban Management System
