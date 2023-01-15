@@ -6,29 +6,43 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Log Masuk | Al-Khairiah</title>
+		<link rel="stylesheet" type="text/css" href="login.css">
 	</head>
 	<body>
-	
-	<%-- # LOGIN FORM # --%>
-	<form method="post">
-	<h2>Log Masuk</h2><br><br>
-	
-	<%-- 1. Login Details --%>
-	E-mel
-	<input type="text" name="email" required><br><br>
-	
-	Kata laluan
-	<input type="password" name="password" required><br><br>
-	
-	<%-- 2. Submit Button --%>
-	<input type="submit" value="Log Masuk" formaction="LoginHandler?action=login"><br><br>
-	
-	<%-- 3. Other buttons --%>
-	<a href="#">Terlupa kata laluan?</a><br>
-	<a href="registration-client.jsp">Tiada akaun? Cipta akaun baru</a>
+	<div class="container">
+	</div>
+	<div class="center">
+		<%-- # LOGIN FORM # --%>
+		<form method="post">
+		<h1>Log Masuk</h1>
+		<div class="containerform">
+		<%-- 1. Login Details --%>
+		
+		E-mel
+		<div class="txt_field">
+		<input type="text" name="email" required><br><br>
+		</div>
+		
+		Kata laluan
+		<div class="txt_field">
+		<input type="password" name="password" required><br><br>
+		</div>
+		<%-- 2. Submit Button --%>
+		<div class="pass">Terlupa Kata Laluan?</div>
+		<input type="submit" value="Log Masuk" formaction="LoginHandler?action=login"><br><br>
+		
+		<%-- 3. Other buttons --%>
+		<div class="signup_link">
+			Tiada akaun? <a href="registration-client.jsp">Cipta akaun baru</a>
+		</div>
+		</form>
+		<%-- # CLOSE LOGIN FORM # --%>
+		</div>
+	</div>
+	<div class="image">
+      	<div class="imagecontainer">
 
-	</form>
-	<%-- # CLOSE LOGIN FORM # --%>
-	
+      	</div> 
+    </div>
 	</body>
 </html>
