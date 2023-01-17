@@ -16,10 +16,17 @@
 			font-family: Arial, Helvetica, sans-serif;
 		}
 		
-	
+	.sidebarname p{
+	display:flex;
+	color:white;
+	position:relative;
+	align-items:center;
+	justify-content:center;
+	margin-bottom:10px;
+		}
+		
 	table {
 			position: absolute;
-			
 			left: 50%;
 			top: 50%;
 			transform: translate(-50%, -50%); */
@@ -85,13 +92,13 @@
 			}
 		}
 		
-		.button {
+		button {
 			border: none;
-			padding: 15px 20px;
+			padding: 10px 10px;
 			text-align: center;
 			text-decoration: none;
 			display: inline-block;
-			font-size: 16px;
+			font-size: 10px;
 			margin: 4px 2px;
 			cursor: pointer;
 			-webkit-transition-duration: 0.4s; 
@@ -104,9 +111,18 @@
 			position: absolute;
 			font-size: 16px;
 		}
-		.button:hover {
+		button:hover {
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 		}
+		
+		#kosongkan{
+	background-color:#cc3030;
+	color:white;
+	}
+	#tambah{
+	background-color:#037247;
+	color:white;
+	}
 	
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 *{
@@ -151,7 +167,7 @@ body{
   width: 25px;
 }
 .wrapper .sidebar ul li:hover{
-  background-color: #5a595e;
+  background-color: #023020;
 }
     
 .wrapper .sidebar ul li:hover a{
@@ -257,7 +273,10 @@ body{
 		
 		<div class="wrapper">
 			<div class="sidebar">
-				<h2>PENGURUSAN</h2>
+				<h2>PENGGUNA</h2>
+				<div class="sidebarname">
+					<p><c:forEach var="client" items="${resultClient.rows}"><c:out value="${client.clientfullname}"/></c:forEach></p>
+				</div>
 					<c:forEach var="committee" items="${committeeResult.rows}">
 						<p style="position:relative;Left:18px;color: rgb(253, 253, 253); font-weight: bold;">
 						<c:out value="${committee.committeefullname}"/>
@@ -328,7 +347,7 @@ body{
 				<td><fmt:formatNumber type="number" maxFractionDigits="2" value="${booking.paymentTotal}"/></td>
 				<td>
 					<input type="hidden" name="bookingID" value="${booking.bookingid}">
-					<button name="view" formaction="BookingHandler?action=viewBooking&bookingID=${booking.bookingid}">LIHAT</button>
+					<button name="view" id="tambah" formaction="BookingHandler?action=viewBooking&bookingID=${booking.bookingid}">LIHAT</button>
 				</td>
 			</tr>
 			</c:forEach>

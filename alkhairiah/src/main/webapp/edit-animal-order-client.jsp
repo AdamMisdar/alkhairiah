@@ -303,6 +303,7 @@ body{
 		</sql:query>
 		
 		<%-- # START: HEADER --%>
+		
 		<div class="header">
 			<div>
 				<span style="position: absolute; right: 20px; top:7px; font-size: 16px; color: white;">NETGREEN</span>
@@ -310,7 +311,6 @@ body{
 			</div>
 		</div>
 
-		
 		<div class="wrapper">
 			<div class="sidebar">
 				<h2>PENGGUNA</h2>

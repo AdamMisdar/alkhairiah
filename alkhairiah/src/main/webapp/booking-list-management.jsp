@@ -17,6 +17,14 @@
 			font-family: Arial, Helvetica, sans-serif;
 		}
 		
+	.sidebarname p{
+	display:flex;
+	color:white;
+	position:relative;
+	align-items:center;
+	justify-content:center;
+	margin-bottom:10px;
+	}
 	
 	table {
 			position: absolute;

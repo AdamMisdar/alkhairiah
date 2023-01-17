@@ -18,19 +18,30 @@
 			font-family: Arial, Helvetica, sans-serif;
 		}
 		
+	.sidebarname p{
+	display:flex;
+	color:white;
+	position:relative;
+	align-items:center;
+	justify-content:center;
+	margin-bottom:10px;
+		}
+		
 	
 	table {
-			position: absolute;
-			
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%); */
-			border-collapse: collapse;
-			width: 70%;
-			height: 100px;
-			border: 1px solid #bdc3c7;
-			box-shadow: 2px 2px 12px rgba(0,0,0,0.2), -1px -1px 8px rgba(0,0,0,0.2);
-			margin-left: 110px;
+			display:flex;
+		    position: relative;
+		    border-collapse: collapse;
+		    width: 70%;
+		    height: 50%;
+		    border: 1px solid #bdc3c7;
+		    box-shadow: 2px 2px 12px rgba(0,0,0,0.2), -1px -1px 8px rgba(0,0,0,0.2);
+		    justify-content: center;
+		    align-items: center;
+		    margin: auto;
+		    margin-top:10px;
+		    margin-bottom:10px;
+		    margin-left:300px;
 		}
 		input {
 			width: 100%;
@@ -68,10 +79,10 @@
 			height: 50px;
 			width: 40vh;
 			display:flex;
-			position: absolute;
+			position: relative;
 			margin:auto;
 			top:20%;
-			left:22%;
+			right:20%;
 			justify-content: center;
 			padding : auto;
 			border-radius: 10px;
@@ -87,28 +98,39 @@
 			}
 		}
 		
-		.button {
+		button {
+		
 			border: none;
 			padding: 15px 20px;
 			text-align: center;
 			text-decoration: none;
-			display: inline-block;
+			display: flex;
 			font-size: 16px;
-			margin: 4px 2px;
 			cursor: pointer;
 			-webkit-transition-duration: 0.4s; 
 			transition-duration: 0.4s;
 			font-family: Arial, Helvetica, sans-serif;
             border-radius: 5px;
-			
+            margin:auto;
+            position:relative;
+            
 		}
+		
 		#buttonhome{
 			position: absolute;
 			font-size: 16px;
 		}
-		.button:hover {
+		button:hover {
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 		}
+		#kosongkan{
+	background-color:#cc3030;
+	color:white;
+	}
+	#tambah{
+	background-color:#037247;
+	color:white;
+	}
 	
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 *{
@@ -248,7 +270,10 @@ body{
 		
 		<div class="wrapper">
 			<div class="sidebar">
-				<h2>PENGURUSAN</h2>
+				<h2>PENGGUNA</h2>
+				<div class="sidebarname">
+					<p><c:forEach var="client" items="${resultClient.rows}"><c:out value="${client.clientfullname}"/></c:forEach></p>
+				</div>
 					<c:forEach var="committee" items="${committeeResult.rows}">
 						<p style="position:relative;Left:18px;color: rgb(253, 253, 253); font-weight: bold;">
 						<c:out value="${committee.committeefullname}"/>
@@ -315,7 +340,7 @@ body{
 			</tr>
 			</c:forEach>
 		</table>
-		<button name="edit" onclick="location.href='edit-client-account.jsp'">KEMASKINI AKAUN</button>
+		<button name="edit" id="tambah" onclick="location.href='edit-client-account.jsp'">KEMASKINI AKAUN</button>
 		<%-- # END: CLIENT ACCOUNT DISPLAY # --%>
 		
 	</body>
