@@ -17,21 +17,33 @@
 			padding: 0;
 			margin: 0;
 			font-family: Arial, Helvetica, sans-serif;
+			text-align:center;
 		}
 		
+	.sidebarname p{
+	display:flex;
+	color:white;
+	position:relative;
+	align-items:center;
+	justify-content:center;
+	margin-bottom:10px;
+	}
 	
 	table {
-			position: absolute;
-			
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%);
-			border-collapse: collapse;
-			width: 70%;
-			height: 100px;
-			border: 1px solid #bdc3c7;
-			box-shadow: 2px 2px 12px rgba(0,0,0,0.2), -1px -1px 8px rgba(0,0,0,0.2);
-			margin-left: 110px;
+			display:flex;
+		    position: relative;
+		    border-collapse: collapse;
+		    width: 70%;
+		    height: 50%;
+		    border: 1px solid #bdc3c7;
+		    box-shadow: 2px 2px 12px rgba(0,0,0,0.2), -1px -1px 8px rgba(0,0,0,0.2);
+		    justify-content: center;
+		    align-items: center;
+		    margin: auto;
+		    margin-top:10px;
+		    margin-bottom:10px;
+		    margin-left:300px;
+		    text-align:center;
 		}
 		input {
 			width: 100%;
@@ -52,6 +64,7 @@
 			background-color: #037247;
 			color: rgb(8, 8, 8);
             padding: 20px;
+            
 		}
 		
 		h2 {
@@ -88,28 +101,62 @@
 			}
 		}
 		
-		.button {
+		button {
+		
 			border: none;
 			padding: 15px 20px;
 			text-align: center;
 			text-decoration: none;
 			display: inline-block;
 			font-size: 16px;
-			margin: 4px 2px;
 			cursor: pointer;
 			-webkit-transition-duration: 0.4s; 
 			transition-duration: 0.4s;
 			font-family: Arial, Helvetica, sans-serif;
             border-radius: 5px;
-			
+            margin:auto  ;
+            margin-top:10px;
+            margin-bottom:10px;
+            position:relative;
+            
 		}
+		
+		table button {
+		
+			border: none;
+			padding: 15px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			justify-content: center;
+			align-items:center;
+			margin:auto;
+			font-size: 16px;
+			cursor: pointer;
+			-webkit-transition-duration: 0.4s; 
+			transition-duration: 0.4s;
+			font-family: Arial, Helvetica, sans-serif;
+            border-radius: 5px;
+            margin:0 ;
+            
+		}
+		
 		#buttonhome{
 			position: absolute;
 			font-size: 16px;
 		}
-		.button:hover {
+		button:hover {
 			box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 		}
+	#kosongkan{
+	background-color:#cc3030;
+	color:white;
+	}
+	#tambah{
+	background-color:#037247;
+	color:white;
+	}
+	
 	
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
 *{
@@ -132,7 +179,7 @@ body{
   height: 100%;
   background: #037247;
   padding: 30px 0px;
-  position: fixed;
+  position:fixed;
 }
 .wrapper .sidebar h2{
   color: #fff;
@@ -154,7 +201,7 @@ body{
   width: 25px;
 }
 .wrapper .sidebar ul li:hover{
-  background-color: #5a595e;
+  background-color: #023020;
 }
     
 .wrapper .sidebar ul li:hover a{
@@ -274,7 +321,10 @@ body{
 		
 		<div class="wrapper">
 			<div class="sidebar">
-				<h2>PENGURUSAN</h2>
+				<h2>PENGGUNA</h2>
+				<div class="sidebarname">
+					<p><c:forEach var="client" items="${resultClient.rows}"><c:out value="${client.clientfullname}"/></c:forEach></p>
+				</div>
 					<c:forEach var="committee" items="${committeeResult.rows}">
 						<p style="position:relative;Left:18px;color: rgb(253, 253, 253); font-weight: bold;">
 						<c:out value="${committee.committeefullname}"/>
@@ -290,29 +340,40 @@ body{
 					<li><a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=view-client-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
 					<li><a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=logout"> Log Keluar</a></li>
 					
+					
 				</ul> 
 			</div>
 		</div>
 		<%-- # END: HEADER --%>
 		
 		<%-- NAVIGATION ELEMENTS --%>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp">Laman Utama</a><br>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=view-client-account.jsp">Akaun</a><br>
-		<a href="#create-booking">Buat Tempahan</a><br>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=booking-list-client.jsp">Senarai Tempahan</a><br>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=logout">Log Keluar</a><br><br>
 		
 		<%-- CLIENT INFO DISPLAY --%>
-		KLIEN <br><c:forEach var="client" items="${resultClient.rows}"><c:out value="${client.clientfullname}"/></c:forEach><br>
 		
 		<%-- # START: BOOKING SEGMENT # --%>
-		<br><br><h2>TEMPAHAN BARU</h2>
 		
-		<p>ID Tempahan: <%= booking_ID %></p>
-		<p>ID Akaun: <%= client_ID %></p>
+		<h2>TEMPAHAN BARU</h2>
 		
+		<%-- 
+		<div class="id">
+			<p>ID Tempahan: <%= booking_ID %></p>
+			<p>ID Akaun: <%= client_ID %></p>
+		</div>
+		--%>
+		
+		<table>
+            <tr>
+                <td>ID Tempahan :</td>
+                <td><%= booking_ID %></td>
+            </tr>
+            <tr>
+                <td>ID Akaun :</td>
+                <td><%= client_ID %></td>
+            </tr>
+        </table>
+        
 		<%-- SECTION: Add Animal Order(s) --%>
-		<br><h3>Informasi Korban</h3>
+		<h2>INFORMASI KORBAN</h2>
 				
 		<%-- Dependent Information --%>
 		<form method="post">
@@ -331,15 +392,20 @@ body{
 				<td>Nama Tanggungan</td>
 				<td><input type="text" name="dependentName" value="" placeholder="Nama Tanggungan"></td>
 			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="hidden" name="bookingID" value="<%=booking_ID%>">
+					<button id="kosongkan" type="reset">KOSONGKAN</button>
+					<button id="tambah" type="submit" formaction="AnimalOrderHandler?action=addAnimalOrder">TAMBAH</button>
+					</td>
+			</tr>
 		</table>
-			<input type="hidden" name="bookingID" value="<%=booking_ID%>">
-			<button type="reset">KOSONGKAN</button>
-			<button type="submit" formaction="AnimalOrderHandler?action=addAnimalOrder">TAMBAH</button>
 		</form>
 		
 		<%-- SECTION: Animal Details List --%>
-		<br>
-		<h3>SENARAI HAIWAN KORBAN</h3>
+		
+			<h2>SENARAI HAIWAN KORBAN</h2>
+		
 		<table style="padding: 20px; text-align: left;">
 			<tr>
 				<td>Jenis Haiwan</td>
@@ -364,7 +430,9 @@ body{
 		</table>
 		
 		<%-- SECTION: Inserted Animal Order(s) --%>
-		<h3>SENARAI NAMA DAN TEMPAHAN HAIWAN</h3>
+		
+		<h2>SENARAI NAMA DAN TEMPAHAN HAIWAN</h2>
+		
 		<form method="post">
 		<table style="padding: 20px; text-align: left;">
 			<tr>
@@ -422,8 +490,8 @@ body{
 				<td>
 					<input type="hidden" name="nextPage" value="createBooking">
 					<input type="hidden" name="animalOrderID" value="<%=resultOrder.getInt("animalorderid")%>">  
-					<button name="edit" formaction="AnimalOrderHandler?action=editAnimalOrder&animalOrderID=<%=resultOrder.getInt("animalorderid")%>">KEMASKINI NAMA</button>
-					<button name="delete" formaction="AnimalOrderHandler?action=deleteAnimalOrder&animalOrderID=<%=resultOrder.getInt("animalorderid")%>">BUANG</button>
+					<button id="tambah" name="edit" formaction="AnimalOrderHandler?action=editAnimalOrder&animalOrderID=<%=resultOrder.getInt("animalorderid")%>">KEMASKINI NAMA</button>
+					<button id="kosongkan" name="delete" formaction="AnimalOrderHandler?action=deleteAnimalOrder&animalOrderID=<%=resultOrder.getInt("animalorderid")%>">BUANG</button>
 				</td>
 			</tr>
 			<%
@@ -446,8 +514,8 @@ body{
 			<input type="hidden" name="bookingID" value="<%=booking_ID%>">
 			<input type="hidden" name="clientID" value="<%=client_ID%>">
 			
-			<button name="cancel" formaction="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp">BATALKAN TEMPAHAN</button>
-			<button type="submit" formaction="BookingHandler?action=toPayment">TERUS KE PEMBAYARAN</button>
+			<button id="kosongkan" onclick="cancelConfirm()" name="cancel" formaction="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp">BATALKAN TEMPAHAN</button>
+			<button id="tambah"  type="submit" formaction="BookingHandler?action=toPayment">TERUS KE PEMBAYARAN</button>
 		</form>
 		<%-- # END: BOOKING SEGMENT # --%>
 		
