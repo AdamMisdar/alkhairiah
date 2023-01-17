@@ -8,6 +8,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Laman Utama | Al-Khairiah</title>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Laman Utama Netgreen Qurban</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/fontawesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body>
 		<%-- COMMITTEE: LOGIN REQUIREMENTS --%>
@@ -83,6 +91,8 @@
 		<% } %>
 		
 		<a href="LoginHandler?action=logout">Log Keluar</a><br><br><br>
+	
+       
 		<%-- # END: NAV ELEMENTS DISPLAY ACCORDING TO COMMITTEE TYPE # --%>
 		
 		<%-- # START: COMMITTEE INFO DISPLAY # --%>
@@ -99,6 +109,7 @@
             <span><c:out value="${management.committeefullname}"/></span><br><br>
 		</c:forEach>
 		
+
 		<%-- Voluntary --%>
 		<% } else if(committeeType.equalsIgnoreCase("Voluntary")) { %>
 		
@@ -108,11 +119,15 @@
             <span><c:out value="${voluntary.committeefullname}"/></span><br><br>
 		</c:forEach>
 		
+		
 		<% } %>
+		
 		<%-- # END: COMMITTEE INFO DISPLAY # --%>
 
 		<%-- All other home page details here --%>
 		<br><br>ALL OTHER ELEMENTS HERE
+		
+		
 		
 	</body>
 </html>
