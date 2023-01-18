@@ -160,7 +160,7 @@ body{
   width: 25px;
 }
 .wrapper .sidebar ul li:hover{
-  background-color: #5a595e;
+  background-color: #023020;;
 }
     
 .wrapper .sidebar ul li:hover a{
@@ -313,15 +313,8 @@ body{
 	</form>	
 	</div>
 		<%-- # START: NAVIGATION ELEMENTS # --%>
-		<a href="index-committee.jsp">Laman Utama</a><br>
-		<a href="view-committee-account.jsp">Akaun</a><br>
-		<a href="booking-list-management.jsp">Senarai Tempahan</a><br>
-		<a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a><br>
-		<a href="client-list.jsp">Senarai Klien</a><br>
-		<% if(isManager) { /* If committee is Manager */%>
-			<a href="committee-list.jsp">Senarai AJK</a><br>
-			
-		<% } %>
+		
+	
 		<a href="LoginHandler?action=logout">Log Keluar</a><br>
 		<%-- # END: NAVIGATION ELEMENTS # --%>
 		

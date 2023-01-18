@@ -26,16 +26,19 @@
 		}
 		
 	table {
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%, -50%); */
-			border-collapse: collapse;
-			width: 70%;
-			height: 100px;
-			border: 1px solid #bdc3c7;
-			box-shadow: 2px 2px 12px rgba(0,0,0,0.2), -1px -1px 8px rgba(0,0,0,0.2);
-			margin-left: 110px;
+			display:flex;
+		    position: relative;
+		    border-collapse: collapse;
+		    width: 70%;
+		    height: 50%;
+		    border: 1px solid #bdc3c7;
+		    box-shadow: 2px 2px 12px rgba(0,0,0,0.2), -1px -1px 8px rgba(0,0,0,0.2);
+		    justify-content: center;
+		    align-items: center;
+		    margin: auto;
+		    margin-top:10px;
+		    margin-bottom:10px;
+		    margin-left:300px;
 		}
 		input {
 			width: 100%;
@@ -286,7 +289,7 @@ body{
 						</p>
 					</c:forEach>
 				<ul>
-					<li><a href="index-committee.jsp" ><i class="fas fa-home"></i>Halaman Utama</a></li>
+					<li><a href="index-client.jsp" ><i class="fas fa-home"></i>Halaman Utama</a></li>
 					<li><a href="booking-list-client.jsp" ><i class="fas fa-address-book"></i>Senarai Tempahan</a></li>
 					<li><a href="BookingHandler?action=createBooking" ><i class="fas fa-address-book"></i>Buat Tempahan</a></li>
 					<li><a href="view-client-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
@@ -317,9 +320,9 @@ body{
 		KLIEN <br><c:forEach var="client" items="${resultClient.rows}"><c:out value="${client.clientfullname}"/></c:forEach><br>
 		
 		<%-- # START: BOOKING LIST # --%>
-		<div class="title">
+		
 			<h2>SENARAI TEMPAHAN KORBAN</h2>
-		</div>
+		
 		<%--SEARCH BAR--%>
 		<%-- 
 		<form method="get">
