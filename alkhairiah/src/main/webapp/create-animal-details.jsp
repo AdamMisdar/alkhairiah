@@ -102,7 +102,7 @@
 				</tr>
 				<tr>
 					<td>Harga Seekor (RM)</td>
-					<td><input type="number" step="any" name="animalPrice" value="" placeholder="Harga(RM) XXXX.XX"></td>
+					<td><input type="number" step="any" name="animalPrice" value="" placeholder="Harga(RM) XXXX.XX" required></td>
 				</tr>
 			</table>
 			<button name="cancel" formaction="animal-details-list.jsp">BATAL</button>

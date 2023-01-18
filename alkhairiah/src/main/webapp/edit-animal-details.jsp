@@ -141,8 +141,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Harga Seekor</td>
-				<td><input type="number" name="animalPrice" value='<%=resultAnimal.getDouble("animalprice")%>'></td>
+				<td>Harga Seekor (RM)</td>
+				<td><input type="number" name="animalPrice" value='<%=resultAnimal.getDouble("animalprice")%>' required></td>
 			</tr>
 		</table>
 			<input type="hidden" name="animalDetailsID" value='<%=resultAnimal.getInt("animaldetailsid")%>'>

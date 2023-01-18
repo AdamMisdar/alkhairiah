@@ -117,7 +117,7 @@
 			</tr>
 			<tr>
 				<td>Nama</td>
-				<td><input type="text" name="dependentName" value="${animalOrder.dependentname}" placeholder="Nama Tanggungan"></td>
+				<td><input type="text" name="dependentName" value="${animalOrder.dependentname}" placeholder="Nama Tanggungan" required></td>
 			</tr>
 			</c:forEach>
 		</table>
