@@ -180,7 +180,8 @@ public class BookingHandler extends HttpServlet {
 		bookingDAO.deleteBooking(bookingID);
 		
 		// Redirect to JSP
-		toPage = request.getRequestDispatcher("committee-booking-list.jsp");
+		toPage = request.getRequestDispatcher("booking-list-management.jsp");
+		toPage.forward(request, response);
 	}
 	
 	/* Others */

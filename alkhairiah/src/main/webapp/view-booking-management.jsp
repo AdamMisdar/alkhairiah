@@ -501,6 +501,11 @@ body{
 		</table>
 		
 		<button name="back" formaction="booking-list-management.jsp">KEMBALI KE SENARAI</button>
+		
+		<% if(isManager) {%>
+			<button name="delete" formaction="BookingHandler?action=deleteBooking&bookingID=<%=booking_ID%>">BUANG TEMPAHAN</button>
+		<% } %>
+		
 		</form>
 		<%-- # END: BOOKING INFORMATION DISPLAY # --%>
 
