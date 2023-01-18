@@ -248,6 +248,67 @@ body{
     display: none !important;
   }
 }
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+}
+
+/* Style the submit button */
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Style the container for inputs */
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+	width:400px;
+	height:100%;	
+  display:none;
+  background: white;
+  color: black;
+  position: relative;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+#message p {
+  padding: 5px 20px;
+  font-size: 10px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+ 
+}
 </style>
 
 	</head>
@@ -345,42 +406,159 @@ body{
 		%>
 		
 		<%-- CLIENT ACCOUNT INFORMATION --%>
-		<form method="post">
+		<form method="post" id="form">
 			<input type="hidden" name="clientID" value="<%=client_ID%>">
 		<table>
 			<tr>
 				<td>Nama</td>
-				<td><input type="text" name="clientFullName" value='<%=resultClient.getString("clientfullname")%>'></td>
+				<td><input type="text"  name="clientFullName" value='<%=resultClient.getString("clientfullname")%>' ></td>
 			</tr>
 			<tr>
 				<td>No. Telefon</td>
-				<td><input type="text" name="clientPhoneNum" value='<%=resultClient.getString("clientphonenum")%>'></td>
+				<td><input type="text" name="clientPhoneNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" value='<%=resultClient.getString("clientphonenum")%>' required></td>
 			</tr>
 			<tr>
 				<td>Email</td>
-				<td><input type="email" name="clientEmail" value='<%=resultClient.getString("clientemail")%>'></td>
+				<td><input type="email" id="email" name="clientEmail" value='<%=resultClient.getString("clientemail")%>' onkeydown="validation()" required></td>
+				<td><span id="text" ></span></td>
 			</tr>
 			<tr>
 				<td>Tarikh Lahir</td>
-				<td><input type="date" name="clientBirthDate" value='<%=resultClient.getDate("clientbirthdate")%>'></td>
+				<td><input type="date" name="clientBirthDate" value='<%=resultClient.getDate("clientbirthdate")%>' required></td>
 			</tr>
 			<tr>
 				<td>Alamat</td>
-				<td><input type="text" name="clientAddress" value='<%=resultClient.getString("clientaddress")%>'></td>
+				<td><input type="text" name="clientAddress" value='<%=resultClient.getString("clientaddress")%>' required></td>
 			</tr>
 			<tr>
 				<td>Kata Laluan</td>
-				<td><input type="password" name="clientPassword" value='<%=resultClient.getString("clientPassword")%>'></td>
+				<td><input type="password" id="clientPassword" name="clientPassword" value='<%=resultClient.getString("clientPassword")%>'  required></td>
+				<td>
+					<div id="message">
+				  <h3>Password must contain the following:</h3>
+				  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+				  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+				  <p id="number" class="invalid">A <b>number</b></p>
+				  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td>Masukkan Semula Kata Laluan</td>
-				<td><input type="password" name="clientRePassword" value='<%=resultClient.getString("clientPassword")%>'></td>
+				<td><input type="password"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="clientRePassword" value='<%=resultClient.getString("clientPassword")%>' title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></td>
 			</tr>
 		</table>
-			<button id="kosongkan" name="cancel" formaction="view-client-account.jsp">BATAL</button>
-			<button id="tambah" type="submit" formaction="ClientHandler?action=updateClient">SIMPAN</button>
+			<button id="kosongkan" onclick="cancel()" name="cancel" formaction="view-client-account.jsp">BATAL</button>
+			<button id="tambah" onclick="continues()"  type="submit" onsubmit="validatePassword()" formaction="ClientHandler?action=updateClient">SIMPAN</button>
 		</form>
 		<% } %>
 		<%-- # END: EDIT CLIENT ACCOUNT # --%>
+		
+		<script type="text/javascript">
+		
+		function validation() {
+      	  let form = document.getElementById('form')
+      	  let email = document.getElementById('email').value
+      	  let text = document.getElementById('text')
+      	  let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+
+      	  if (email.match(pattern)) {
+      	    form.classList.add('valid')
+      	    form.classList.remove('invalid')
+      	    text.innerHTML = "Emel yang dimasukkan adalah sah"
+      	    text.style.color = '#037247'
+      	  } else {
+      	    form.classList.remove('valid')
+      	    form.classList.add('invalid')
+      	    text.innerHTML = "Sila masukkan emel yang sah"
+      	    text.style.color = '#ff0000'
+      	  }
+
+      	  if (email == '') {
+      	    form.classList.remove('valid')
+      	    form.classList.remove('invalid')
+      	    text.innerHTML = ""
+      	    text.style.color = '#00ff00'
+      	  }
+      	}
+		
+		
+		var myInput = document.getElementById("clientPassword");
+		var letter = document.getElementById("letter");
+		var capital = document.getElementById("capital");
+		var number = document.getElementById("number");
+		var length = document.getElementById("length");
+
+		// When the user clicks on the password field, show the message box
+		myInput.onfocus = function() {
+		  document.getElementById("message").style.display = "block";
+		}
+
+		// When the user clicks outside of the password field, hide the message box
+		myInput.onblur = function() {
+		  document.getElementById("message").style.display = "none";
+		}
+
+		// When the user starts to type something inside the password field
+		myInput.onkeyup = function() {
+		  // Validate lowercase letters
+		  var lowerCaseLetters = /[a-z]/g;
+		  if(myInput.value.match(lowerCaseLetters)) {  
+		    letter.classList.remove("invalid");
+		    letter.classList.add("valid");
+		  } else {
+		    letter.classList.remove("valid");
+		    letter.classList.add("invalid");
+		  }
+		  
+		  // Validate capital letters
+		  var upperCaseLetters = /[A-Z]/g;
+		  if(myInput.value.match(upperCaseLetters)) {  
+		    capital.classList.remove("invalid");
+		    capital.classList.add("valid");
+		  } else {
+		    capital.classList.remove("valid");
+		    capital.classList.add("invalid");
+		  }
+
+		  // Validate numbers
+		  var numbers = /[0-9]/g;
+		  if(myInput.value.match(numbers)) {  
+		    number.classList.remove("invalid");
+		    number.classList.add("valid");
+		  } else {
+		    number.classList.remove("valid");
+		    number.classList.add("invalid");
+		  }
+		  
+		  // Validate length
+		  if(myInput.value.length >= 8) {
+		    length.classList.remove("invalid");
+		    length.classList.add("valid");
+		  } else {
+		    length.classList.remove("valid");
+		    length.classList.add("invalid");
+		  }
+		}
+		
+		function continues() {
+			  let text = "Anda pasti ingin teruskan?";
+			  if (confirm(text) == true) {
+			    text = "You pressed OK!";
+			  } else {
+			    text = "You canceled!";
+			  }
+			  document.getElementById("demo").innerHTML = text;
+			}
+		function cancel() {
+			  let textC = "Anda pasti ingin batal?";
+			  if (confirm(text) == true) {
+			    text = "You pressed OK!";
+			  } else {
+			    text = "You canceled!";
+			  }
+			  document.getElementById("demo").innerHTML = textC;
+			}
+		</script>
 	</body>
 </html>

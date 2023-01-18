@@ -445,11 +445,12 @@ body{
 		<p>Sila muat naik resit pembayaran anda.</p>
 		<p>PDF/PNG/JPEG sahaja diterima.</p>
 		
-		<form method="post" enctype="multipart/form-data">
+		<form method="post" enctype="multipart/form-data" onsubmit="return Validate(this);">
 			<p>Resit Anda:</p>
 			<div class="parent">
 			<br>
-			<input id="file" type="file" accept="image/pdf" name="paymentReceipt">
+			<input id="file" type="file" accept="image/pdf" name="paymentReceipt" required="" oninvalid="this.setCustomValidity('Sila pilih fail')"
+ 				oninput="setCustomValidity('')">
 			
 			</div>
 			
@@ -463,5 +464,35 @@ body{
 			<button id="tambah" type="submit" formaction="PaymentHandler?action=addPayment">BAYAR</button>
 		</form>
 		<%-- # END: PAYMENT FORM # --%>
+		<script>
+		var _validFileExtensions = [".pdf",".png"];    
+		function Validate(oForm) {
+		    var arrInputs = oForm.getElementsByTagName("input");
+		    for (var i = 0; i < arrInputs.length; i++) {
+		        var oInput = arrInputs[i];
+		        if (oInput.type == "file") {
+		            var sFileName = oInput.value;
+		            if (sFileName.length > 0) {
+		                var blnValid = false;
+		                for (var j = 0; j < _validFileExtensions.length; j++) {
+		                    var sCurExtension = _validFileExtensions[j];
+		                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+		                        blnValid = true;
+		                        break;
+		                    }
+		                }
+		                
+		                if (!blnValid) {
+		                    alert( sFileName + " Format fail yang dimasukkan salah. Hanya fail ini diterima : " + _validFileExtensions.join(", "));
+		                    return false;
+		                }
+		            }
+		        }
+		    }
+		    return true;
+		}
+		
+		
+		</script>
 	</body>
 </html>

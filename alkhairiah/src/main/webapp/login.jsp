@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<title>Log Masuk | Al-Khairiah</title>
 		<link rel="stylesheet" type="text/css" href="login.css">
+		
 	</head>
 	<body>
 	<div class="container">
@@ -20,16 +21,16 @@
 		
 		E-mel
 		<div class="txt_field">
-		<input type="text" name="email" required><br><br>
+		<input id="email" type="text" name="email" required><br><br>
 		</div>
 		
 		Kata laluan
 		<div class="txt_field">
-		<input type="password" name="password" required><br><br>
+		<input id="password" type="password" name="password" required><br><br>
 		</div>
 		<%-- 2. Submit Button --%>
 		<div class="pass">Terlupa Kata Laluan?</div>
-		<input type="submit" value="Log Masuk" formaction="LoginHandler?action=login"><br><br>
+		<input type="submit" value="Log Masuk" onclick="validation();" formaction="LoginHandler?action=login"><br><br>
 		
 		<%-- 3. Other buttons --%>
 		<div class="signup_link">
@@ -44,5 +45,7 @@
 
       	</div> 
     </div>
+    
+   
 	</body>
 </html>

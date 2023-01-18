@@ -413,7 +413,7 @@ body{
 						<input type="hidden" name="previewCommitteeID" value="${management.committeeid}">
 						<button name="view" id="tambah" formaction="view-committee-account-manager.jsp">LIHAT</button>
 						<c:if test="${management.jobscope != 'Pengerusi'}">
-							<button name="delete" id="kosongkan" formaction="CommitteeHandler?action=deleteCommittee">PADAM</button>
+							<button name="delete" id="kosongkan" onclick="deleted()" formaction="CommitteeHandler?action=deleteCommittee">PADAM</button>
 						</c:if>
 					</form>
 				</td>
@@ -432,13 +432,20 @@ body{
 						<input type="hidden" name="previewCommitteeID" value="${voluntary.committeeid}">
 						<input type="hidden" name="previewCommitteeType" value="Voluntary">
 						<button name="view" id="tambah" formaction="view-committee-account-manager.jsp">LIHAT</button>
-						<button name="delete" id="kosongkan" formaction="CommitteeHandler?action=deleteCommittee">PADAM</button>
+						<button name="delete" id="kosongkan" onclick="deleted()" formaction="CommitteeHandler?action=deleteCommittee">PADAM</button>
 					</form>
 				</td>
 			</tr>
 			</c:forEach>
 		</table>
 		<%-- # END: COMMITTEE LIST CONTENT # --%>
-
+	<script>
+	
+	function deleted(){
+		alert("Successfully delete the Account");
+	}
+	
+	
+	</script>
 	</body>
 </html>
