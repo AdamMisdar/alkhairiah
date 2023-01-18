@@ -319,7 +319,7 @@ body{
 		
 		<div class="wrapper">
 			<div class="sidebar">
-				<h2>PENGURUS</h2>
+				<h2>PENGURUSAN</h2>
 				<div class="sidebarname">
 					<c:forEach var="manager" items="${resultCommittee.rows}">
 			            <p><span><c:out value="${manager.managementposition}"/></span><br>
