@@ -449,7 +449,7 @@ body{
 			<p>Resit Anda:</p>
 			<div class="parent">
 			<br>
-			<input id="file" type="file" accept="image/pdf" name="paymentReceipt" required="" oninvalid="this.setCustomValidity('Sila pilih fail')"
+			<input id="file" type="file" accept="image/pdf" name="paymentReceipt" required oninvalid="this.setCustomValidity('Sila pilih fail')"
  				oninput="setCustomValidity('')">
 			
 			</div>
@@ -459,13 +459,15 @@ body{
 			<input type="hidden" name="paymentDate" value="<%=dateToday%>">
 			<input type="hidden" name="bookingID" value="<%=booking_ID%>">
 			
-			<button id="back" name="back" formaction="BookingHandler?action=toBooking&bookingID=<%=booking_ID%>">KEMBALI </button>
-			<button id="kosongkan" name="cancel" formaction="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp">BATAL</button>
-			<button id="tambah" type="submit" formaction="PaymentHandler?action=addPayment">BAYAR</button>
+			<button id="tambah" type="submit" formaction="PaymentHandler?action=addPayment" onsubmit="alert('Tempahan Berjaya.')">BAYAR</button>
 		</form>
+		<button id="back" name="back" onclick="location.href='BookingHandler?action=toBooking&bookingID=<%=booking_ID%>'">KEMBALI </button>
+		<button id="kosongkan" name="cancel" onclick="cancelConfirm()" >BATALKAN TEMPAHAN</button>
+		
+		
 		<%-- # END: PAYMENT FORM # --%>
 		<script>
-		var _validFileExtensions = [".pdf",".png"];    
+		var _validFileExtensions = [".pdf",".png", ".jpg", ".jpeg"];    
 		function Validate(oForm) {
 		    var arrInputs = oForm.getElementsByTagName("input");
 		    for (var i = 0; i < arrInputs.length; i++) {
@@ -492,7 +494,15 @@ body{
 		    return true;
 		}
 		
-		
+		function cancelConfirm() {
+			var result = confirm('Anda pasti batalkan tempahan ini?');
+			if (result == false) {
+				event.preventDefault();
+			}
+			else {
+				location.href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp";
+			}
+		}
 
 		</script>
 	</body>

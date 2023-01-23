@@ -142,16 +142,41 @@
 			</tr>
 			<tr>
 				<td>Harga Seekor (RM)</td>
-				<td><input type="number" name="animalPrice" value='<%=resultAnimal.getDouble("animalprice")%>' required></td>
+				<td><input type="number" id="animalPrice" step="any" min="0" oninput="check(this)" name="animalPrice" placeholder="Harga(RM) XXXX.XX" value='<%=resultAnimal.getDouble("animalprice")%>' required></td>
 			</tr>
 		</table>
 			<input type="hidden" name="animalDetailsID" value='<%=resultAnimal.getInt("animaldetailsid")%>'>
-			
-			<button name="cancel" formaction="animal-details-list.jsp">BATAL</button>
 			<button type="submit" formaction="AnimalDetailsHandler?action=updateAnimalDetails">SIMPAN</button>
 		</form>
 		
+		<button name="cancel" onclick="location.href='animal-details-list.jsp'">BATAL</button>
+		
 		<% } %>
 		<%-- # END: EDIT ANIMAL DETAILS # --%>
+		
+		<script>
+		function check(input) {
+			var price = document.getElementById('animalPrice').value;
+			
+			if (price > 0) {
+				input.setCustomValidity('');
+				
+			}
+			
+			else if (price == '' || price == null){
+				input.setCustomValidity('Sila masukkan harga.');
+				input.preventDefault();
+				
+			}
+			
+			else if (price <= 0) {
+				input.setCustomValidity('Harga mesti lebih RM0.00');
+				input.preventDefault();
+				
+			} 
+			
+		}
+		
+		</script>
 	</body>
 </html>

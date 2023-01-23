@@ -344,23 +344,6 @@ body{
 		</div>
 		<%-- # END: HEADER --%>
 		
-		
-		<%-- NAVIGATION ELEMENTS 
-		<% if(isCreateBooking) { %>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp">Laman Utama</a><br>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=view-client-account.jsp">Akaun</a><br>
-		<a href="#create-booking">Buat Tempahan</a><br>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=booking-list-client.jsp">Senarai Tempahan</a><br>
-		<a href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=logout">Log Keluar</a><br><br>
-		<% } else { %>
-		<a href="index-client.jsp">Laman Utama</a><br>
-		<a href="view-client-account.jsp">Akaun</a><br>
-		<a href="BookingHandler?action=createBooking">Buat Tempahan</a><br>
-		<a href="booking-list-client.jsp">Senarai Tempahan</a><br>
-		<a href="LoginHandler?action=logout">Log Keluar</a><br><br>
-		<% } %>
-		--%>
-
 		<%-- CLIENT INFO DISPLAY --%>
 		
 		<%-- # START: ANIMAL ORDER UPDATE FORM # --%>
@@ -388,14 +371,39 @@ body{
 			</tr>
 			<tr>
 				<td>Nama</td>
-				<td><input type="text" name="dependentName" value="${animalOrder.dependentname}" placeholder="Nama Tanggungan"></td>
+				<td><input type="text" id="dependentName" name="dependentName" oninput="check(this)" value="${animalOrder.dependentname}" placeholder="Nama Tanggungan" required></td>
 			</tr>
 			</c:forEach>
 		</table>
-			<input type="hidden" name="nextPage" value="<%=nextPage%>"> 
-			<button id="kosongkan"name="cancel" formaction="AnimalOrderHandler?action=cancelUpdate">BATAL</button>
-			<button id="tambah" type="submit" formaction="AnimalOrderHandler?action=updateAnimalOrder">SIMPAN</button>	
+			<input type=hidden name="nextPage" value="<%=nextPage%>">
+			<button id="tambah" type="submit" onclick="updateConfirm()" formaction="AnimalOrderHandler?action=updateAnimalOrder">SIMPAN</button>	
 		</form>
+		
+		<button id="kosongkan"name="cancel" onclick="location.href='AnimalOrderHandler?action=cancelUpdate&nextPage=<%=nextPage%>&bookingID=<%=booking_ID%>'">BATAL</button>
 		<%-- # END: ANIMAL ORDER UPDATE FORM # --%>
+		
+		<script>
+		function updateConfirm() {
+			var name = document.getElementById('dependentName').value;
+			
+			if (name == '' || name == null) {
+				alert('Nama tanggungan tidak boleh kosong.');
+				event.preventDefault();
+			}
+			
+			else if (name >= 0) {
+				alert('Sila letakkan nama tanggungan yang betul.');
+				event.preventDefault();
+			}
+			
+			else if (name < 0) {
+				alert('Sila letakkan nama tanggungan yang betul.');
+				event.preventDefault();
+			}
+				
+		}
+		
+		
+		</script>
 	</body>
 </html>

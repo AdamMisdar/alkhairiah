@@ -390,13 +390,13 @@ body{
 			</tr>
 			<tr>
 				<td>Nama Tanggungan</td>
-				<td><input type="text" name="dependentName" value="" placeholder="Nama Tanggungan"></td>
+				<td><input type="text" id="dependentName" name="dependentName" value="" placeholder="Nama Tanggungan"></td>
 			</tr>
 			<tr>
 				<td colspan="2">
 					<input type="hidden" name="bookingID" value="<%=booking_ID%>">
 					<button id="kosongkan" type="reset">KOSONGKAN</button>
-					<button id="tambah" type="submit" formaction="AnimalOrderHandler?action=addAnimalOrder">TAMBAH</button>
+					<button id="tambah" type="submit" formaction="AnimalOrderHandler?action=addAnimalOrder" onclick="addConfirm()">TAMBAH</button>
 					</td>
 			</tr>
 		</table>
@@ -491,7 +491,7 @@ body{
 					<input type="hidden" name="nextPage" value="createBooking">
 					<input type="hidden" name="animalOrderID" value="<%=resultOrder.getInt("animalorderid")%>">  
 					<button id="tambah" name="edit" formaction="AnimalOrderHandler?action=editAnimalOrder&animalOrderID=<%=resultOrder.getInt("animalorderid")%>">KEMASKINI NAMA</button>
-					<button id="kosongkan" name="delete" formaction="AnimalOrderHandler?action=deleteAnimalOrder&animalOrderID=<%=resultOrder.getInt("animalorderid")%>">BUANG</button>
+					<button id="kosongkan" name="delete" formaction="AnimalOrderHandler?action=deleteAnimalOrder&animalOrderID=<%=resultOrder.getInt("animalorderid")%>" onclick="return deleteOrder()">BUANG</button>
 				</td>
 			</tr>
 			<%
@@ -506,7 +506,7 @@ body{
 				<td>Jumlah (RM)</td>
 				<td>	
 					<fmt:formatNumber type="number" maxFractionDigits="2" value="<%=paymentTotal%>"/>
-					<input type="hidden" name="paymentTotal" value="<%=paymentTotal%>">
+					<input id="paymentTotal" type="hidden" name="paymentTotal" value="<%=paymentTotal%>">
 				</td>
 			</tr>
 		</table>
@@ -515,7 +515,7 @@ body{
 			<input type="hidden" name="clientID" value="<%=client_ID%>">
 			
 			<button id="kosongkan" onclick="cancelConfirm()" name="cancel" formaction="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp">BATALKAN TEMPAHAN</button>
-			<button id="tambah"  type="submit" formaction="BookingHandler?action=toPayment">TERUS KE PEMBAYARAN</button>
+			<button id="tambah"  type="submit" onclick="return confirmBooking()" formaction="BookingHandler?action=toPayment">TERUS KE PEMBAYARAN</button>
 		</form>
 		<%-- # END: BOOKING SEGMENT # --%>
 		
@@ -529,15 +529,9 @@ body{
 			}
 		}
 		
-		function deleteConfirm() {
-			var result = confirm('Anda pasti buang tempahan ini?');
-			if (result == false) {
-				event.preventDefault();
-			}
-		}
-		
 		function confirmBooking() {
 			var totalPayment = document.getElementById('paymentTotal').value;
+			
 			if (totalPayment == 0) {
 				alert('Tempahan memerlukan sekurang-kurangnya satu bahagian korban.')
 				event.preventDefault();
@@ -558,7 +552,23 @@ body{
 				event.preventDefault();
 			}
 			
+			else if (name >= 0) {
+				alert('Sila letakkan nama tanggungan yang betul.');
+				event.preventDefault();
+			}
+			
+			else if (name < 0) {
+				alert('Sila letakkan nama tanggungan yang betul.');
+				event.preventDefault();
+			}
+			
 		}
+		
+		function deleteOrder() {
+			return confirm('Anda pasti buang nama ini?');
+			
+		}
+		
 	</script>
 	</body>
 </html>

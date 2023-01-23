@@ -340,12 +340,12 @@
 				<ul>
 					<li><a href="index-committee.jsp"><i class="fas fa-home"></i>Halaman Utama</a></li>
 					<li><a href="booking-list-management.jsp" ><i class="fas fa-address-book"></i>Senarai Tempahan</a></li>
-					<li><a href="client-list.jsp">Senarai Klien</a></li>
 					<li><a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a></li>
-					<li><a href="view-committee-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
+					<li><a href="client-list.jsp">Senarai Klien</a></li>
 					<% if(isManager) { /* If committee is Manager */%>
 					<li><a href="committee-list.jsp">Senarai AJK</a><br></li>
 					<% } %>
+					<li><a href="view-committee-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
 					<li><a href="LoginHandler?action=logout">Log Keluar</a></li>
 					
 				</ul> 

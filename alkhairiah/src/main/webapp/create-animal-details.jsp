@@ -385,17 +385,39 @@
 				</tr>
 				<tr>
 					<td>Harga Seekor (RM)</td>
-					<td><input type="number" id="animalPrice" step="any" name="animalPrice" value="" min="0"  placeholder="Harga(RM) XXXX.XX" required></td>
+					<td><input type="number" id="animalPrice" name="animalPrice" value="" min="0" oninput="check(this)" placeholder="Harga(RM) XXXX.XX" required></td>
 					<td><span id="message"></span></td>
 				</tr>
 			</table>
-			<button name="cancel" formaction="animal-details-list.jsp">BATAL</button>
+			
 			<button type="submit" formaction="AnimalDetailsHandler?action=createAnimalDetails">TAMBAH</button>
 		</form>
+		
+		<button name="cancel" onclick="location.href='animal-details-list.jsp'">BATAL</button>
 		<%-- # END: CREATE ANIMAL DETAILS FORM --%>
 		
 		<script>
-		
+		function check(input) {
+			var price = document.getElementById('animalPrice').value;
+			
+			if (price > 0) {
+				input.setCustomValidity('');
+				
+			}
+			
+			else if (price == '' || price == null){
+				input.setCustomValidity('Sila masukkan harga.');
+				input.preventDefault();
+				
+			}
+			
+			else if (price <= 0) {
+				input.setCustomValidity('Harga mesti lebih RM0.00');
+				input.preventDefault();
+				
+			} 
+			
+		}
 		</script>
 	</body>
 </html>

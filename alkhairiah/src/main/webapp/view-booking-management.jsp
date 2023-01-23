@@ -503,11 +503,19 @@ body{
 		<button name="back" formaction="booking-list-management.jsp">KEMBALI KE SENARAI</button>
 		
 		<% if(isManager) {%>
-			<button name="delete" formaction="BookingHandler?action=deleteBooking&bookingID=<%=booking_ID%>">BUANG TEMPAHAN</button>
+			<button name="delete" onclick="return deleteBooking()" formaction="BookingHandler?action=deleteBooking&bookingID=<%=booking_ID%>">BUANG TEMPAHAN</button>
 		<% } %>
 		
 		</form>
 		<%-- # END: BOOKING INFORMATION DISPLAY # --%>
+		
+		<script>
+		function deleteBooking() {
+			return confirm('Anda pasti buang tempahan ini?');
+			
+		}
+		
+		</script>
 
 	</body>
 </html>

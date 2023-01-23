@@ -400,14 +400,41 @@ body{
 			</tr>
 			<tr>
 				<td>Nama</td>
-				<td><input type="text" name="dependentName" value="${animalOrder.dependentname}" placeholder="Nama Tanggungan" required></td>
+				<td><input type="text" id="dependentName" name="dependentName" value="${animalOrder.dependentname}" placeholder="Nama Tanggungan"></td>
 			</tr>
 			</c:forEach>
 		</table>
 			<input type="hidden" name="nextPage" value="<%=nextPage%>"> 
-			<button name="cancel" formaction="AnimalOrderHandler?action=cancelUpdate">BATAL</button>
-			<button type="submit" formaction="AnimalOrderHandler?action=updateAnimalOrderCommittee">SIMPAN</button>	
+			<button type="submit" onclick="updateConfirm()" formaction="AnimalOrderHandler?action=updateAnimalOrderCommittee">SIMPAN</button>	
 		</form>
+		
+		<button id="kosongkan"name="cancel" onclick="location.href='AnimalOrderHandler?action=cancelUpdate&nextPage=<%=nextPage%>&bookingID=<%=booking_ID%>'">BATAL</button>
+		
+		
 		<%-- # END: ANIMAL ORDER UPDATE FORM # --%>
+		
+		<script>
+		function updateConfirm() {
+			var name = document.getElementById('dependentName').value;
+			
+			if (name == '' || name == null) {
+				alert('Nama tanggungan tidak boleh kosong.');
+				event.preventDefault();
+			}
+			
+			else if (name >= 0) {
+				alert('Sila letakkan nama tanggungan yang betul.');
+				event.preventDefault();
+			}
+			
+			else if (name < 0) {
+				alert('Sila letakkan nama tanggungan yang betul.');
+				event.preventDefault();
+			}
+				
+		}
+		
+		
+		</script>
 	</body>
 </html>
