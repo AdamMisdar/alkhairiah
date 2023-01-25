@@ -10,6 +10,7 @@
 	<head>
 	<meta charset="UTF-8">
 	<title>Akaun | Al-Khairiah</title>
+	<link rel="stylesheet" type="text/css" href="committee-style.css">
 	</head>
 	<body>
 		<%-- COMMITTEE: LOGIN REQUIREMENTS --%>
@@ -62,39 +63,66 @@
 		</sql:query>
 		
 		<%-- # START: HEADER --%>
-		NETGREEN<br>
+		<div class="header">
+			<div>
+				<span style="position: absolute; right: 20px; top:7px; font-size: 16px; color: white;">NETGREEN</span>
+				<span></span>
+			</div>
+		</div>
+
+		
+		<div class="wrapper">
+			<div class="sidebar">
+				<h2>PENGURUSAN</h2>
+					<div class="sidebarname">
+					<% if(isManager) {%>
+						<c:forEach var="manager" items="${resultCommittee.rows}">
+							<p><span>PENGURUSAN (PENGURUS)</span><br></p>
+			            	<p><span><c:out value="${manager.managementposition}"/></span><br></p>
+			            	<p><span><c:out value="${manager.committeefullname}"/></span><br></p>
+						</c:forEach>
+						
+					<%-- Ordinary Management --%>
+						<% } else { %>
+							<c:forEach var="committee" items="${resultCommittee.rows}">
+								<p><span>PENGURUSAN</span><br></p>
+				            	<p><span><c:out value="${committee.managementposition}"/></span><br></p>
+				            	<p><span><c:out value="${committee.committeefullname}"/></span><br></p>
+							</c:forEach>
+						<% } %>
+					</div>
+					<c:forEach var="committee" items="${committeeResult.rows}">
+						<p style="position:relative;Left:18px;color: rgb(253, 253, 253); font-weight: bold;">
+						<c:out value="${committee.committeefullname}"/>
+						</p>
+						<p style="position:relative;Left:18px;color: rgb(253, 253, 253);">
+						<c:out value="${committee.managementposition}"/>
+						</p>
+					</c:forEach>
+				<ul>
+					<li><a href="index-committee.jsp"><i class="fas fa-home"></i>Halaman Utama</a></li>
+					<li><a href="booking-list-management.jsp" ><i class="fas fa-address-book"></i>Senarai Tempahan</a></li>
+					<li><a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a></li>
+					<li><a href="client-list.jsp">Senarai Klien</a></li>
+					<% if(isManager) { /* If committee is Manager */%>
+					<li><a href="committee-list.jsp">Senarai AJK</a></li>
+					<% } %>
+					<li><a href="view-committee-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
+					<li><a href="LoginHandler?action=logout">Log Keluar</a></li>
+					
+				</ul> 
+			</div>
+		</div>
 		<%-- # END: HEADER --%>
 		
 		<%-- # START: NAVIGATION ELEMENTS # --%>
-		<a href="index-committee.jsp">Laman Utama</a><br>
-		<a href="view-committee-account.jsp">Akaun</a><br>
-		<a href="booking-list-management.jsp">Senarai Tempahan</a><br>
-		<a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a><br>
-		<a href="client-list.jsp">Senarai Klien</a><br>
-		<% if(isManager) { /* If committee is Manager */%>
-			<a href="committee-list.jsp">Senarai AJK</a><br>
-		<% } %>
-		<a href="LoginHandler?action=logout">Log Keluar</a><br>
+		
 		<%-- # END: NAVIGATION ELEMENTS # --%>
 		
 		<%-- # START: COMMITTEE INFO DISPLAY # --%>
 		<br><br>
 		<%-- Manager --%>
-		<% if(isManager) {%>
-			<c:forEach var="manager" items="${resultCommittee.rows}">
-				<span>PENGURUSAN (PENGURUS)</span><br>
-            	<span><c:out value="${manager.managementposition}"/></span><br>
-            	<span><c:out value="${manager.committeefullname}"/></span><br>
-			</c:forEach>
-			
-		<%-- Ordinary Management --%>
-		<% } else { %>
-			<c:forEach var="committee" items="${resultCommittee.rows}">
-				<span>PENGURUSAN</span><br>
-            	<span><c:out value="${committee.managementposition}"/></span><br>
-            	<span><c:out value="${committee.committeefullname}"/></span><br>
-			</c:forEach>
-		<% } %>
+		
 		<%-- # END: COMMITTEE INFO DISPLAY # --%>
 		
 		<%-- # START: CLIENT'S ACCOUNT DISPLAY # --%>
@@ -132,9 +160,9 @@
 		<input type="hidden" name="clientID" value="${client.clientid}">
 		</c:forEach>
 		
-		<button name="back" formaction="client-list.jsp">KEMBALI KE SENARAI</button>
-		<button name="edit" formaction="edit-client-account-management.jsp">KEMASKINI AKAUN</button>
-		<button name="delete" formaction="ClientHandler?action=deleteClient">PADAM AKAUN INI</button>
+		<button name="back" id="back" formaction="client-list.jsp">KEMBALI KE SENARAI</button>
+		<button name="edit" id="tambah" formaction="edit-client-account-management.jsp">KEMASKINI AKAUN</button>
+		<button name="delete" id="kosongkan" formaction="ClientHandler?action=deleteClient">PADAM AKAUN INI</button>
 		</form>
 		<%-- # END: CLIENT'S ACCOUNT DISPLAY # --%>
 		

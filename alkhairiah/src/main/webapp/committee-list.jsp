@@ -24,6 +24,7 @@
 	align-items:center;
 	justify-content:center;
 	margin-bottom:10px;
+	
 	}
 	
 	table {
@@ -116,6 +117,7 @@
             margin-bottom:10px;
             position:relative;
             
+            
 		}
 		
 		table button {
@@ -187,6 +189,7 @@ body{
 .wrapper{
   display: flex;
   position: relative;
+ 
 }
 .wrapper .sidebar{
   width: 250px;
@@ -194,6 +197,7 @@ body{
   background: #037247;
   padding: 30px 0px;
   position:fixed;
+  
 }
 .wrapper .sidebar h2{
   color: #fff;
@@ -342,12 +346,12 @@ body{
 						</p>
 					</c:forEach>
 				<ul>
-					<li><a href="index-committee.jsp"><i class="fas fa-home"></i>Halaman Utama</a></li>
-					<li><a href="booking-list-management.jsp" ><i class="fas fa-address-book"></i>Senarai Tempahan</a></li>
+					<li><a href="index-committee.jsp">Halaman Utama</a></li>
+					<li><a href="booking-list-management.jsp" >Senarai Tempahan</a></li>
 					<li><a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a></li>
 					<li><a href="client-list.jsp">Senarai Klien</a></li>
-					<li><a href="committee-list.jsp">Senarai AJK</a><li>
-					<li><a href="view-committee-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
+					<li><a href="committee-list.jsp">Senarai AJK</a></li>
+					<li><a href="view-committee-account.jsp">Akaun</a></li>
 					<li><a href="LoginHandler?action=logout"> Log Keluar</a></li>
 				</ul> 
 			</div>

@@ -8,6 +8,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Akaun | Al-Khairiah</title>
+		<link rel="stylesheet" type="text/css" href="committee-style.css">
 	</head>
 	<body>
 		<%-- COMMITTEE: LOGIN REQUIREMENTS --%>
@@ -53,34 +54,62 @@
 		<%-- # END: CURRENT COMMITTEE DETAILS SQL # --%>
 		
 		<%-- # START: HEADER --%>
-		NETGREEN<br>
+		<div class="header">
+			<div>
+				<span style="position: absolute; right: 20px; top:7px; font-size: 16px; color: white;">NETGREEN</span>
+				<span></span>
+			</div>
+		</div>
+
+		
+		<div class="wrapper">
+			<div class="sidebar">
+				<h2>PENGURUSAN</h2>
+					<div class="sidebarname">
+					<c:forEach var="manager" items="${resultCommittee.rows}">
+			            <p><span><c:out value="${manager.managementposition}"/></span><br>
+			            <p><span><c:out value="${manager.committeefullname}"/></span><br>
+					</c:forEach>
+					</div>
+					<c:forEach var="committee" items="${committeeResult.rows}">
+						<p style="position:relative;Left:18px;color: rgb(253, 253, 253); font-weight: bold;">
+						<c:out value="${committee.committeefullname}"/>
+						</p>
+						<p style="position:relative;Left:18px;color: rgb(253, 253, 253);">
+						<c:out value="${committee.managementposition}"/>
+						</p>
+					</c:forEach>
+				<ul>
+					
+				<li><a href="index-committee.jsp">Laman Utama</a><br></li>
+				<li><a href="view-committee-account.jsp">Akaun</a><br></li>
+				
+				<%-- Management Only --%>
+				<% if(committeeType.equalsIgnoreCase("Management")) { %>
+					<li><a href="booking-list-management.jsp">Senarai Tempahan</a></li>
+					<li><a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a></li>
+					<li><a href="client-list.jsp">Senarai Klien</a></li>
+					<%-- Manager Only --%>
+					<% if(isManager) { %>
+						<li><a href="committee-list.jsp">Senarai AJK</a></li>
+					<% } %>
+					
+				<% } %>
+				
+				<li><a href="LoginHandler?action=logout">Log Keluar</a></li>
+		
+				</ul> 
+			</div>
+		</div>
 		<%-- # END: HEADER --%>
 		
 		<%-- # START: NAV ELEMENTS DISPLAY ACCORDING TO COMMITTEE TYPE # --%>
 		<%-- All Committee --%>
-		<a href="index-committee.jsp">Laman Utama</a><br>
-		<a href="view-committee-account.jsp">Akaun</a><br>
 		
-		<%-- Management Only --%>
-		<% if(committeeType.equalsIgnoreCase("Management")) { %>
-			<a href="booking-list-management.jsp">Senarai Tempahan</a><br>
-			<a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a><br>
-			<a href="client-list.jsp">Senarai Klien</a><br>
-			<%-- Manager Only --%>
-			<% if(isManager) { %>
-				<a href="committee-list.jsp">Senarai AJK</a><br>
-			<% } %>
-		<% } %>
-		
-		<a href="LoginHandler?action=logout">Log Keluar</a><br><br><br>
 		<%-- # END: NAV ELEMENTS DISPLAY ACCORDING TO COMMITTEE TYPE # --%>
 		
 		<%-- # START: COMMITTEE INFO DISPLAY # --%>
-		<c:forEach var="manager" items="${resultCommittee.rows}">
-			<span>PENGURUSAN (PENGURUS)</span><br>
-            <span><c:out value="${manager.managementposition}"/></span><br>
-            <span><c:out value="${manager.committeefullname}"/></span><br><br>
-		</c:forEach>
+		
 		<%-- # END: COMMITTEE INFO DISPLAY # --%>
 		
 		<%-- # START: PREVIEW COMMITTEE DETAILS SQL # --%>
@@ -176,8 +205,8 @@
 		</table>
 		<input type="hidden" name="previewCommitteeID" value="<%=previewCommitteeID%>">
 		<input type="hidden" name="previewCommitteeType" value="<%=previewCommitteeType%>">
-		<button name="back" formaction="committee-list.jsp">KEMBALI KE SENARAI</button>
-		<button name="edit" formaction="edit-committee-account-manager.jsp">KEMASKINI AKAUN</button>
+		<button name="back" id="back" formaction="committee-list.jsp">KEMBALI KE SENARAI</button>
+		<button name="edit" id="tambah" formaction="edit-committee-account-manager.jsp">KEMASKINI AKAUN</button>
 		</form>
 		<%-- # END: COMMITTEE'S ACCOUNT INFORMATION DISPLAY # --%>
 		

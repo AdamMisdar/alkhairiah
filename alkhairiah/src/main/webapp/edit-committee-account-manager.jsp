@@ -10,6 +10,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Kemaskini Akaun | Al-Khairiah</title>
+		<link rel="stylesheet" type="text/css" href="committee-style.css">
 	</head>
 	<body>
 		<%-- COMMITTEE: LOGIN REQUIREMENTS --%>
@@ -53,25 +54,49 @@
 		</sql:query> 
 		
 		<%-- # END: CURRENT COMMITTEE DETAILS SQL # --%>
+		<%-- # START: HEADER --%>
+		<div class="header">
+			<div>
+				<span style="position: absolute; right: 20px; top:7px; font-size: 16px; color: white;">NETGREEN</span>
+				<span></span>
+			</div>
+		</div>
+
+		
+		<div class="wrapper">
+			<div class="sidebar">
+				<h2>PENGURUS</h2>
+				<div class="sidebarname">
+					<c:forEach var="management" items="${resultManagement.rows}">
+						<p><span>PENGURUSAN (PENGURUS)</span><br></p>
+			            <p><span><c:out value="${management.managementposition}"/></span><br></p>
+			            <p><span><c:out value="${management.committeefullname}"/></span><br><br></p>
+				</c:forEach>
+				<ul>
+					<li><a href="index-committee.jsp"><i class="fas fa-home"></i>Halaman Utama</a></li>
+					<li><a href="booking-list-management.jsp" ><i class="fas fa-address-book"></i>Senarai Tempahan</a></li>
+					<li><a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a></li>
+					<li><a href="client-list.jsp">Senarai Klien</a></li>
+					<% if(isManager) { /* If committee is Manager */%>
+					<li><a href="committee-list.jsp">Senarai AJK</a></li>
+					<% } %>
+					<li><a href="view-committee-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
+					<li><a href="LoginHandler?action=logout">Log Keluar</a></li>
+					
+				</ul> 
+			</div>
+		</div>
+		</div>
+		<%-- # END: HEADER --%>
 		
 		<%-- # START: NAV ELEMENTS DISPLAY ACCORDING TO COMMITTEE TYPE # --%>
-		<a href="index-committee.jsp">Laman Utama</a><br>
-		<a href="view-committee-account.jsp">Akaun</a><br>
-		<a href="booking-list-management.jsp">Senarai Tempahan</a><br>
-		<a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a><br>
-		<a href="client-list.jsp">Senarai Klien</a><br>
-		<a href="committee-list.jsp">Senarai AJK</a><br>		
-		<a href="LoginHandler?action=logout">Log Keluar</a><br><br><br>
+	
 		<%-- # END: NAV ELEMENTS DISPLAY ACCORDING TO COMMITTEE TYPE # --%>
 		
 		<%-- # START: COMMITTEE INFO DISPLAY # --%>
 		<%-- Management --%>
 		
-		<c:forEach var="management" items="${resultManagement.rows}">
-			<span>PENGURUSAN (PENGURUS)</span><br>
-            <span><c:out value="${management.managementposition}"/></span><br>
-            <span><c:out value="${management.committeefullname}"/></span><br><br>
-		</c:forEach>
+	
 
 		<%-- # END: COMMITTEE INFO DISPLAY # --%>
 		
@@ -83,7 +108,7 @@
 		<%-- # END: MANAGER LIST --%>
 		
 		<%-- # START: EDIT COMMITTEE ACCOUNT # --%>
-		<br><br><h2>KEMASKINI AKAUN</h2>
+		<br><h2>KEMASKINI AKAUN</h2>
 		
 		<%-- SQL QUERY: COMMITTEE DETAILS --%>
 		<%
@@ -128,40 +153,40 @@
 		
 		<%-- FORM: COMMITTEE DETAILS --%>
 
-		<form method="post">
+		<form method="post" id="form">  
 			<input type="hidden" name="previewCommitteeID" value='<%=previewCommitteeID%>'>
 			<input type="hidden" name="previewCommitteeType" value='<%=previewCommitteeType%>'>
 			<c:set var="previewCommitteeID" value='<%=previewCommitteeID%>'/>
 		<table>
 			<tr>
 				<td>Nama</td>
-				<td><input type="text" name="committeeFullName" value='<%=resultCommittee.getString("committeefullname")%>'></td>
+				<td><input type="text" name="committeeFullName" value='<%=resultCommittee.getString("committeefullname")%>' required></td>
 			</tr>
 			<tr>
 				<td>No. Telefon</td>
-				<td><input type="text" name="committeePhoneNum" value='<%=resultCommittee.getString("committeephonenum")%>'></td>
+				<td><input type="text" name="committeePhoneNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"  value='<%=resultCommittee.getString("committeephonenum")%>' required></td>
 			</tr>
 			<tr>
 				<td>Tarikh Lahir</td>
-				<td><input type="date" name="committeeBirthDate" value='<%=resultCommittee.getDate("committeebirthdate")%>'></td>
+				<td><input type="date" name="committeeBirthDate" value='<%=resultCommittee.getDate("committeebirthdate")%>' required></td>
 			</tr>
 			<tr>
 				<td>Alamat</td>
-				<td><input type="text" name="committeeAddress" value='<%=resultCommittee.getString("committeeaddress")%>'></td>
+				<td><input type="text" name="committeeAddress" value='<%=resultCommittee.getString("committeeaddress")%>' required></td>
 			</tr>
 			
 			<%-- Management --%>
 			<% if(previewCommitteeType.equalsIgnoreCase("Management")) { %>
 			<tr>
 				<td>Jawatan</td>
-				<td><input type="text" name="managementPosition" value='<%=resultCommittee.getString("managementposition")%>'></td>
+				<td><input type="text" name="managementPosition" value='<%=resultCommittee.getString("managementposition")%>' required></td>
 			</tr>
 			<% if(!(resultCommittee.getString("managementposition")).equalsIgnoreCase("Pengerusi")) { %>
 			<tr>
 				<td>Nama Pengurus</td>
 				<td>
 					<select name="managerID">
-						<option selected value='<%=resultCommittee.getInt("managerid")%>'><c:out value='<%=resultCommittee.getString("managername")%>'/><c:set var="thismanagerid" value='<%=resultCommittee.getInt("managerid")%>'/></option>
+						<option selected value='<%=resultCommittee.getInt("managerid")%>'><c:out value='<%=resultCommittee.getString("managername")%>'/><c:set var="thismanagerid" value='<%=resultCommittee.getInt("managerid")%>' /></option>
 						<c:forEach var="manager" items="${resultManager.rows}">
 							<c:if test="${thismanagerid != manager.committeeid}"> <%-- other manager's --%>
 								<c:if test ="${previewCommitteeID != manager.committeeid}"> <%-- cannot be self manager --%>
@@ -177,11 +202,11 @@
 			<% } } else if(previewCommitteeType.equalsIgnoreCase("Voluntary")) { %>
 			<tr>
 				<td>Peranan</td>
-				<td><input type="text" name="voluntaryRole" value='<%=resultCommittee.getString("voluntaryrole")%>'></td>
+				<td><input type="text" name="voluntaryRole" value='<%=resultCommittee.getString("voluntaryrole")%>' required></td>
 			</tr>
 			<tr>
 				<td>Kadar Setiap Jam</td>
-				<td><input type="text" name="hourlyRate" value='<%=resultCommittee.getDouble("hourlyrate")%>'></td>
+				<td><input type="text" name="hourlyRate" value='<%=resultCommittee.getDouble("hourlyrate")%>' required></td>
 			</tr>
 			<tr>
 				<td>Nama Pengurus</td>
@@ -200,23 +225,140 @@
 			
 			<tr>
 				<td>Emel</td>
-				<td><input type="email" name="committeeEmail" value='<%=resultCommittee.getString("committeeemail")%>'></td>
+				<td><input type="email" id="email" name="committeeEmail" value='<%=resultCommittee.getString("committeeemail")%>' onkeydown="validation()" required></td>
+				<td><span id="text" ></span></td>
 			</tr>
 			<tr>
 				<td>Kata Laluan</td>
-				<td><input type="password" name="committeePassword" value='<%=resultCommittee.getString("committeepassword")%>'></td>
+				<td><input type="password" id="committeePassword" name="committeePassword" value='<%=resultCommittee.getString("committeepassword")%>' required></td>
+				<td>
+					<div id="message">
+				  <h3>Password must contain the following:</h3>
+				  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+				  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+				  <p id="number" class="invalid">A <b>number</b></p>
+				  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td>Masukkan Semula Kata Laluan</td>
-				<td><input type="password" name="committeeRePassword" value='<%=resultCommittee.getString("committeepassword")%>'></td>
+				<td><input type="password" name="committeeRePassword" value='<%=resultCommittee.getString("committeepassword")%>'  required></td>
+
 			</tr>
 		</table>
 		<input type="hidden" name="committeeID" value="<%=previewCommitteeID%>"> <%-- For handler --%>
-		<button name="cancel" formaction="view-committee-account-manager.jsp">BATAL</button>
-		<button type="submit" formaction="CommitteeHandler?action=updateCommitteeManager">SIMPAN</button>
+		<button name="cancel" id="kosongkan" onclick="cancel()" formaction="view-committee-account-manager.jsp">BATAL</button>
+		<button type="submit" id="tambah" onclick="continues()" formaction="CommitteeHandler?action=updateCommitteeManager">SIMPAN</button>
 		</form>
 		<% } %>
 		<%-- # END: EDIT COMMITTEE ACCOUNT # --%>
 		
+		<script type="text/javascript">
+		
+		function validation() {
+      	  let form = document.getElementById('form')
+      	  let email = document.getElementById('email').value
+      	  let text = document.getElementById('text')
+      	  let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+
+      	  if (email.match(pattern)) {
+      	    form.classList.add('valid')
+      	    form.classList.remove('invalid')
+      	    text.innerHTML = "Emel yang dimasukkan adalah sah"
+      	    text.style.color = '#037247'
+      	  } else {
+      	    form.classList.remove('valid')
+      	    form.classList.add('invalid')
+      	    text.innerHTML = "Sila masukkan emel yang sah"
+      	    text.style.color = '#ff0000'
+      	  }
+
+      	  if (email == '') {
+      	    form.classList.remove('valid')
+      	    form.classList.remove('invalid')
+      	    text.innerHTML = ""
+      	    text.style.color = '#00ff00'
+      	  }
+      	}
+		
+		
+		var myInput = document.getElementById("committeePassword");
+		var letter = document.getElementById("letter");
+		var capital = document.getElementById("capital");
+		var number = document.getElementById("number");
+		var length = document.getElementById("length");
+
+		// When the user clicks on the password field, show the message box
+		myInput.onfocus = function() {
+		  document.getElementById("message").style.display = "block";
+		}
+
+		// When the user clicks outside of the password field, hide the message box
+		myInput.onblur = function() {
+		  document.getElementById("message").style.display = "none";
+		}
+
+		// When the user starts to type something inside the password field
+		myInput.onkeyup = function() {
+		  // Validate lowercase letters
+		  var lowerCaseLetters = /[a-z]/g;
+		  if(myInput.value.match(lowerCaseLetters)) {  
+		    letter.classList.remove("invalid");
+		    letter.classList.add("valid");
+		  } else {
+		    letter.classList.remove("valid");
+		    letter.classList.add("invalid");
+		  }
+		  
+		  // Validate capital letters
+		  var upperCaseLetters = /[A-Z]/g;
+		  if(myInput.value.match(upperCaseLetters)) {  
+		    capital.classList.remove("invalid");
+		    capital.classList.add("valid");
+		  } else {
+		    capital.classList.remove("valid");
+		    capital.classList.add("invalid");
+		  }
+
+		  // Validate numbers
+		  var numbers = /[0-9]/g;
+		  if(myInput.value.match(numbers)) {  
+		    number.classList.remove("invalid");
+		    number.classList.add("valid");
+		  } else {
+		    number.classList.remove("valid");
+		    number.classList.add("invalid");
+		  }
+		  
+		  // Validate length
+		  if(myInput.value.length >= 8) {
+		    length.classList.remove("invalid");
+		    length.classList.add("valid");
+		  } else {
+		    length.classList.remove("valid");
+		    length.classList.add("invalid");
+		  }
+		}
+		
+		function continues() {
+			  let text = "Anda pasti ingin teruskan?";
+			  if (confirm(text) == true) {
+			    text = "You pressed OK!";
+			  } else {
+			    text = "You canceled!";
+			  }
+			  document.getElementById("demo").innerHTML = text;
+			}
+		function cancel() {
+			  let textC = "Anda pasti ingin batal?";
+			  if (confirm(text) == true) {
+			    text = "You pressed OK!";
+			  } else {
+			    text = "You canceled!";
+			  }
+			  document.getElementById("demo").innerHTML = textC;
+			}
+		</script>
 	</body>
 </html>

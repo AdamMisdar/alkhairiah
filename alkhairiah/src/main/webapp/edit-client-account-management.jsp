@@ -289,9 +289,13 @@ input[type=submit] {
 }
 
 /* Add a green text color and a checkmark when the requirements are right */
-.valid {
+#text .valid {
   color: green;
 }
+#message .valid {
+  color: green;
+}
+
 
 .valid:before {
   position: relative;
@@ -300,9 +304,13 @@ input[type=submit] {
 }
 
 /* Add a red text color and an "x" when the requirements are wrong */
-.invalid {
+#text .invalid {
   color: red;
 }
+#message .invalid {
+  color: red;
+}
+
 
 .invalid:before {
   position: relative;
@@ -453,28 +461,29 @@ input[type=submit] {
 		<table>
 			<tr>
 				<td>Nama</td>
-				<td><input type="text" name="clientFullName" value='<%=resultClient.getString("clientfullname")%>'></td>
-				<td><span id="text" ></span></td>
+				<td><input type="text" name="clientFullName" value='<%=resultClient.getString("clientfullname")%>' required></td>
+				
 			</tr>
 			<tr>
 				<td>No. Telefon</td>
-				<td><input type="text" name="clientPhoneNum" value='<%=resultClient.getString("clientphonenum")%>'></td>
+				<td><input type="text" required name="clientPhoneNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11"  value='<%=resultClient.getString("clientphonenum")%>'></td>
 			</tr>
 			<tr>
-				<td>Email</td>
-				<td><input type="email" id="email" name="clientEmail" value='<%=resultClient.getString("clientemail")%>' onkeydown="validation()"></td>
+				<td>Emel</td>
+				<td><input type="email" id="email" required name="clientEmail" value='<%=resultClient.getString("clientemail")%>' onkeydown="validation()"></td>
+				<td><span id="text" ></span></td>
 			</tr>
 			<tr>
 				<td>Tarikh Lahir</td>
-				<td><input type="date" name="clientBirthDate" value='<%=resultClient.getDate("clientbirthdate")%>'></td>
+				<td><input type="date" name="clientBirthDate"  required value='<%=resultClient.getDate("clientbirthdate")%>'></td>
 			</tr>
 			<tr>
 				<td>Alamat</td>
-				<td><input type="text" name="clientAddress" value='<%=resultClient.getString("clientaddress")%>'></td>
+				<td><input type="text" name="clientAddress"  required value='<%=resultClient.getString("clientaddress")%>'></td>
 			</tr>
 			<tr>
 				<td>Kata Laluan</td>
-				<td><input type="password" id="clientPassword" name="clientPassword" value='<%=resultClient.getString("clientPassword")%>'></td>
+				<td><input type="password" id="clientPassword"  required name="clientPassword" value='<%=resultClient.getString("clientPassword")%>'></td>
 				<td>
 					<div id="message">
 				  <h3>Password must contain the following:</h3>

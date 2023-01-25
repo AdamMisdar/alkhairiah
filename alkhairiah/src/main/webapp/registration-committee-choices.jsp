@@ -8,6 +8,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Daftar AJK Pengurusan | Al-Khairiah</title>
+		<link rel="stylesheet" type="text/css" href="committee-style.css">
 	</head>
 	<body>
 		<%-- COMMITTEE: LOGIN REQUIREMENTS --%>
@@ -41,26 +42,47 @@
 		</sql:query>
 		
 		<%-- # START: HEADER --%>
-		NETGREEN<br>
+		<div class="header">
+			<div>
+				<span style="position: absolute; right: 20px; top:7px; font-size: 16px; color: white;">NETGREEN</span>
+				<span></span>
+			</div>
+		</div>
+
+		
+		<div class="wrapper">
+			<div class="sidebar">
+				<h2>PENGURUS</h2>
+				<div class="sidebarname">
+					<c:forEach var="manager" items="${resultCommittee.rows}">
+			            <p><span><c:out value="${manager.managementposition}"/></span><br>
+			            <p><span><c:out value="${manager.committeefullname}"/></span><br>
+					</c:forEach>
+				</div>
+				<ul>
+					<li><a href="index-committee.jsp"><i class="fas fa-home"></i>Halaman Utama</a></li>
+					<li><a href="booking-list-management.jsp" ><i class="fas fa-address-book"></i>Senarai Tempahan</a></li>
+					<li><a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a></li>
+					<li><a href="client-list.jsp">Senarai Klien</a></li>
+					
+					<li><a href="committee-list.jsp">Senarai AJK</a></li>
+					
+					<li><a href="view-committee-account.jsp"><i class="fas fa-user"></i> Akaun</a></li>
+					<li><a href="LoginHandler?action=logout">Log Keluar</a></li>
+					
+				</ul> 
+			</div>
+		</div>
+		
 		<%-- # END: HEADER --%>
 		
 		<%-- # START: NAVIGATION ELEMENTS # --%>
-		<a href="index-committee.jsp">Laman Utama</a><br>
-		<a href="view-committee-account.jsp">Akaun</a><br>
-		<a href="booking-list-management.jsp">Senarai Tempahan</a><br>
-		<a href="animal-details-list.jsp">Senarai Maklumat Haiwan</a><br>
-		<a href="client-list.jsp">Senarai Klien</a><br>
-		<a href="committee-list.jsp">Senarai AJK</a><br>
-		<a href="LoginHandler?action=logout">Log Keluar</a><br>
+		
 		<%-- # END: NAVIGATION ELEMENTS # --%>
 		
 		<%-- # START: COMMITTEE INFO DISPLAY # --%>
 		<br><br>
-		<c:forEach var="manager" items="${resultCommittee.rows}">
-			<span>PENGURUSAN (PENGURUS)</span><br>
-            <span><c:out value="${manager.managementposition}"/></span><br>
-            <span><c:out value="${manager.committeefullname}"/></span><br>
-		</c:forEach>
+		
 		<%-- # END: COMMITTEE INFO DISPLAY # --%>
 		
 		<%-- # START: CHOOSE COMMITTEE TYPE # --%>

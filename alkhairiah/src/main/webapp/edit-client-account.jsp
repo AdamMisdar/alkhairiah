@@ -289,9 +289,13 @@ input[type=submit] {
 }
 
 /* Add a green text color and a checkmark when the requirements are right */
-.valid {
+#text .valid {
   color: green;
 }
+#message .valid {
+  color: green;
+}
+
 
 .valid:before {
   position: relative;
@@ -300,9 +304,13 @@ input[type=submit] {
 }
 
 /* Add a red text color and an "x" when the requirements are wrong */
-.invalid {
+#text .invalid {
   color: red;
 }
+#message .invalid {
+  color: red;
+}
+
 
 .invalid:before {
   position: relative;
