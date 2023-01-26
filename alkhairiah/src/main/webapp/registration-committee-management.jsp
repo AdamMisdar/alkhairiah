@@ -179,12 +179,12 @@
       	  if (email.match(pattern)) {
       	    form.classList.add('valid')
       	    form.classList.remove('invalid')
-      	    text.innerHTML = "Your Email Address in valid"
+      	    text.innerHTML = "Emel yang dimasukkan adalah sah"
       	    text.style.color = '#037247'
       	  } else {
       	    form.classList.remove('valid')
       	    form.classList.add('invalid')
-      	    text.innerHTML = "Please Enter Valid Email Address"
+      	    text.innerHTML = "Sila masukkan emel yang sah"
       	    text.style.color = '#ff0000'
       	  }
 

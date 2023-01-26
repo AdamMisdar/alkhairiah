@@ -159,7 +159,12 @@ public class CommitteeHandler extends HttpServlet {
 		session = request.getSession();
 		
 		// Get basic values from JSP
-		String committeeType = (String)session.getAttribute("committeeType");
+		String committeeType = "";
+        if(managerEdit) {
+            committeeType = request.getParameter("previewCommitteeType");
+
+        } else 
+            committeeType = (String)session.getAttribute("committeeType");
 		int committeeID = Integer.parseInt(request.getParameter("committeeID"));
 		String committeeFullName = request.getParameter("committeeFullName");
 		String committeePhoneNum = request.getParameter("committeePhoneNum");

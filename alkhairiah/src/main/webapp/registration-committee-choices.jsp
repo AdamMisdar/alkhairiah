@@ -88,9 +88,9 @@
 		<%-- # START: CHOOSE COMMITTEE TYPE # --%>
 		<br><br><h2>Pilih Jenis AJK</h2>
 		<button name="management" onclick="location.href='registration-committee-management.jsp'">PENGURUSAN</button>
-		<button name="voluntary" onclick="location.href='registration-committee-voluntary.jsp'">SUKARELAWAN</button>
+		<button name="voluntary" id="tambah" onclick="location.href='registration-committee-voluntary.jsp'">SUKARELAWAN</button>
 		<br><br>
-		<button name="back" onclick="location.href='committee-list.jsp'">KEMBALI KE SENARAI</button>
+		<button name="back" id="back" onclick="location.href='committee-list.jsp'">KEMBALI KE SENARAI</button>
 		<%-- # END: CHOOSE COMMITTEE TYPE # --%>
 	</body>
 </html>

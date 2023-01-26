@@ -93,7 +93,7 @@
 		<br><br><h2>Daftar AJK Sukarelawan</h2>
 		<p>Sila isi borang berikut.</p>
 		
-		<form method="post">
+		<form method="post" id="form">
 			<input type="hidden" name="comType" value="voluntary">
 		<table>
 			<tr>
@@ -102,7 +102,7 @@
 			</tr>
 			<tr>
 				<td>No. Telefon</td>
-				<td><input type="text" name="committeePhoneNum" placeholder="0123456789" required></td>
+				<td><input type="text" name="committeePhoneNum" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="11" placeholder="0123456789" required></td>
 			</tr>
 			<tr>
 				<td>Alamat Rumah</td>
@@ -132,7 +132,8 @@
 			</tr>
 			<tr>
 				<td>Emel</td>
-				<td><input type="email" name="committeeEmail" placeholder="contoh@emel.com" required></td>
+				<td><input type="email" id="email" name="committeeEmail" placeholder="contoh@emel.com" onkeydown="validation()" required></td>
+				<td><span id="text" ></span></td>
 			</tr>
 			<tr>
 				<td>Kata Laluan</td>
@@ -152,10 +153,10 @@
 				<td><input type="password" name="committeeRePassword" placeholder="********" required></td>
 			</tr>
 		</table>
-			<button type="submit" onclick="continues()" formaction="CommitteeHandler?action=createCommittee">DAFTAR AKAUN</button>
+			<button type="submit" id="tambah" onclick="continues()" formaction="CommitteeHandler?action=createCommittee">DAFTAR AKAUN</button>
 		</form>
 		
-		<br><button name="back" onclick="location.href='committee-list.jsp'">KEMBALI KE SENARAI</button>
+		<br><button name="back" id="back" onclick="location.href='committee-list.jsp'">KEMBALI KE SENARAI</button>
 		<br>Bukan AJK Sukarelawan? <a href="registration-committee-management.jsp">Daftar AJK Pengurusan</a>
 		<%-- # END: REGISTRATION FORM # --%>
 	
