@@ -10,7 +10,8 @@
 	<body>
 		<% 
 		RequestDispatcher toPage;
-		toPage = request.getRequestDispatcher("PaymentHandler?action=getApplicationPath");
+		//toPage = request.getRequestDispatcher("PaymentHandler?action=getApplicationPath");
+		toPage = request.getRequestDispatcher("login.jsp");
 		toPage.forward(request, response);
 		%>
 	</body>

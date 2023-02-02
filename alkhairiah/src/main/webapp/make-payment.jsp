@@ -451,7 +451,7 @@ body{
 			<br>
 			<input id="file" type="file" accept="image/pdf" name="paymentReceipt" required oninvalid="this.setCustomValidity('Sila pilih fail')"
  				oninput="setCustomValidity('')">
-			
+ 				
 			</div>
 			
 			<br><br>
@@ -469,13 +469,20 @@ body{
 		<script>
 		var _validFileExtensions = [".pdf",".png", ".jpg", ".jpeg"];    
 		function Validate(oForm) {
-		    var arrInputs = oForm.getElementsByTagName("input");
+		    
+			// Check file type
+			var arrInputs = oForm.getElementsByTagName("input");
+		    
 		    for (var i = 0; i < arrInputs.length; i++) {
 		        var oInput = arrInputs[i];
+		        
 		        if (oInput.type == "file") {
 		            var sFileName = oInput.value;
+		            
 		            if (sFileName.length > 0) {
 		                var blnValid = false;
+		            
+		                
 		                for (var j = 0; j < _validFileExtensions.length; j++) {
 		                    var sCurExtension = _validFileExtensions[j];
 		                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
@@ -488,9 +495,30 @@ body{
 		                    alert( sFileName + " Format fail yang dimasukkan salah. Hanya fail ini diterima : " + _validFileExtensions.join(", "));
 		                    return false;
 		                }
+		                
+		                
+		                
 		            }
 		        }
 		    }
+		    
+		    // Check File size
+		    
+		    const fi = document.getElementById('file');
+            // Check if any file is selected.
+            if (fi.files.length > 0) {
+                for (const i = 0; i <= fi.files.length - 1; i++) {
+          
+                    const fsize = fi.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
+                    if (file > 5120) {
+                        alert("Fail melebihi 5MB. Sila muat naik fail bersaiz 5MB kebawah.");
+                        return false;
+                    } 
+                }
+            }
+            
 		    return true;
 		}
 		
@@ -503,7 +531,6 @@ body{
 				location.href="BookingHandler?action=cancelBooking&bookingID=<%= booking_ID %>&redirect=index-client.jsp";
 			}
 		}
-
 		</script>
 	</body>
 </html>

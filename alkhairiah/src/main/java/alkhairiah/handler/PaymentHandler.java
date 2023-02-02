@@ -9,7 +9,7 @@ import alkhairiah.dao.*;
 import alkhairiah.javabean.*;
 
 @WebServlet("/PaymentHandler")
-@MultipartConfig(maxFileSize = 5000000) // 5MB
+@MultipartConfig(maxFileSize = 5242880) // 5MB
 public class PaymentHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -20,6 +20,7 @@ public class PaymentHandler extends HttpServlet {
 	HttpSession session;
 	RequestDispatcher toPage;
 	String UPLOAD_DIRECTORY = "images" + File.separator + "tempAddFiles" + File.separator;
+	
 
 	// Constructor
     public PaymentHandler() {
@@ -81,7 +82,8 @@ public class PaymentHandler extends HttpServlet {
 		String paymentReceiptName = paymentReceipt.getSubmittedFileName();
 		
 		// Get application path
-		String appPath = (String) session.getAttribute("appPath");
+		//String appPath = (String) session.getAttribute("appPath");
+		String appPath = getServletContext().getRealPath("");
 		System.out.println("App Path: " + appPath);
 		
 		// Create image path
